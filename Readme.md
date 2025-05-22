@@ -1,4 +1,4 @@
-# 📊 Case OpenCo – Análise de Crédito com Streamlit
+# 📊 Case OpenCo – Análise de Crédito
 
 Este repositório é a resposta ao **case do processo seletivo da OpenCo**. Ele está dividido em duas partes principais:
 
