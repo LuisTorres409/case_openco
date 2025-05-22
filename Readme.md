@@ -42,4 +42,4 @@ cd case_openco
 pip install -r requirements.txt
 
 # 3. Execute o app
-streamlit run "Página Inicial.py"
+streamlit run "Pagina Inicial.py"
