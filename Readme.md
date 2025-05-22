@@ -1,1 +1,31 @@
-## Iniciando o Repositório
+
+Nele estão incluídas:
+- Análises descritivas e estatísticas
+- Criação de variáveis derivadas
+- Identificação de padrões de inadimplência
+- Visualizações dos dados
+
+---
+
+### 2. 🌐 Aplicativo Streamlit
+
+O repositório principal também contém um **app interativo em Streamlit**, que permite ao usuário explorar as análises diretamente em uma interface visual, organizada por perguntas do case, acessíveis no menu lateral. 
+O App pode ser acessado através do link abaixo:
+[https://case-openco.streamlit.app/](https://case-openco.streamlit.app/)
+
+---
+
+## 🚀 Como executar localmente
+
+Siga os passos abaixo para rodar o projeto localmente:
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/LuisTorres409/case_openco.git
+cd case_openco
+
+# 2. Instale as dependências
+pip install -r requirements.txt
+
+# 3. Execute o app
+streamlit run "Página Inicial.py"
