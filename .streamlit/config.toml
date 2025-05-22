@@ -1,0 +1,7 @@
+[theme]
+primaryColor = "#3EB489"               # Verde menta
+backgroundColor = "#004225"            # Verde escuro (fundo da página)
+secondaryBackgroundColor = "#0A3D2E"   # Verde médio (caixas, etc.)
+textColor = "#FFFFFF"                  # Texto branco
+font = "sans serif"
+sidebarBackgroundColor = "#0A3D2E"     # Cor visível no sidebar (diferente do fundo)

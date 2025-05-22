@@ -1,0 +1,16 @@
+# Ignore arquivos temporários do Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Jupyter e notebooks temporários
+.ipynb_checkpoints/
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.bak
+
+# Arquivos de IDEs
+.vscode/
+.idea/
