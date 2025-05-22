@@ -14,8 +14,7 @@ def load_data() -> pd.DataFrame:
     Retorna:
     - pd.DataFrame: DataFrame com os dados carregados.
     """
-    df: pd.DataFrame = pd.read_excel('data/Case Open.xlsx', sheet_name='Base')
-    df.drop('id', axis=1, inplace=True)
+    df = pd.read_csv('data/base_de_dados_case.csv').drop('Unnamed: 0',axis=1)
     return df
 
 # Questão 1: Métricas Gerais
