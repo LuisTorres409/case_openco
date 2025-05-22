@@ -15,7 +15,8 @@ Nele estão incluídas:
 - Análises descritivas e estatísticas
 - Criação de variáveis derivadas
 - Identificação de padrões de inadimplência
-- Visualizações dos dados
+- Visualizações dos dadosS
+
 
 ---
 
