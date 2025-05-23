@@ -1,32 +1,49 @@
 import streamlit as st
-from utils import load_data, create_bad_column,plot_boxplot,plot_correlation_matrix,plot_scatter,plot_seaborn_histogram,analyze_categorical_features
+import plotly.express as px
+import plotly.graph_objects as go
+from utils import load_data, create_bad_column, plot_boxplot, plot_correlation_matrix, plot_scatter, plot_seaborn_histogram, analyze_categorical_features
 import numpy as np
 import pandas as pd
 
 st.set_page_config(layout='wide')
 st.title("Questão 2: Contratos Bons vs Ruins")
 
+# Load data
 df = load_data()
 df, df_bad, df_good = create_bad_column(df)
 
-col1, col2 = st.columns(2)
-with col1:
-    st.markdown("### Contratos Bons")
-    st.write(df_good.describe().round(2))
-with col2:
-    st.markdown("### Contratos Ruins")
-    st.write(df_bad.describe().round(2))
-
+# Container for Good vs Bad Comparison
 with st.container():
-    st.markdown("## Questão 2: Contratos Bons vs Ruins")
-    df, df_bad, df_good = create_bad_column(df)
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("### Contratos Bons")
-        st.write(df_good.describe().round(2))
-    with col2:
-        st.markdown("### Contratos Ruins")
-        st.write(df_bad.describe().round(2))
+    st.markdown("## Comparação: Contratos Bons vs Ruins")
+    
+    numerical_columns = df.select_dtypes(include=[np.number]).columns.tolist()
+    numerical_columns.remove('Bad')
+    
+    good_stats = df_good[numerical_columns].describe().round(2)
+    bad_stats = df_bad[numerical_columns].describe().round(2)
+    
+    # Plot percentage differences in means
+    st.markdown("### Diferença Percentual nas Médias (Bom - Mau)")
+    mean_diff = good_stats.loc['mean'] - bad_stats.loc['mean']
+    percent_diff = mean_diff / bad_stats.loc['mean'] * 100
+    percent_diff = percent_diff.replace([np.inf, -np.inf], 0) 
+    fig = go.Figure()
+    fig.add_trace(
+        go.Bar(
+            x=percent_diff.index,
+            y=percent_diff.values,
+            marker_color=['#00CC96' if x >= 0 else '#FF5733' for x in percent_diff.values],
+            text=[f"{x:.2f}%" for x in percent_diff.values],
+            textposition='auto'
+        )
+    )
+    fig.update_layout(
+        title="Diferença Percentual nas Médias entre Contratos Bons e Ruins",
+        xaxis_title="Variáveis",
+        yaxis_title="Diferença Percentual (Média Bom - Média Mau) / Média Mau",
+        showlegend=False
+    )
+    st.plotly_chart(fig, use_container_width=True)
 
 # Container para Análise Numérica
 with st.container():
@@ -58,9 +75,7 @@ with st.container():
     st.markdown("## Análise Categórica")
     analyze_categorical_features(df, ['estado', 'setor', 'regiao'], 'Bad')
 
-
 st.markdown("""# Análise de Crédito: Perfil de Bons vs Maus Pagadores
-
 
 ## 📊 Análise Numérica (Variáveis Quantitativas)
 
@@ -73,6 +88,7 @@ Nos gráficos de **boxplot**, **histograma** e **scatterplot**, é possível obs
 - **Score de crédito mais baixo**
 - **Maior faturamento declarado**
 - **Taxas mais elevadas**
+- **Maior dívida**
 
 A análise sugere que, apesar de apresentarem maior faturamento, esses clientes podem ter um perfil de risco elevado, reforçando a importância de considerar múltiplas variáveis na decisão de crédito.
 
@@ -158,7 +174,6 @@ with st.container():
 
     st.markdown("### Análise Categórica para Loss_cat")
     analyze_categorical_features(df, ['estado', 'setor', 'regiao'], 'Loss_cat')
-
 
 st.markdown("""
 ### Após as análises, podemos concluir que as métricas para bons e maus pagadores com Loss e Bad são bem parecidas, inclusive, ao separar o loss na categoria de <20% e >20%, temos uma distribuição bem parecida com a do Bad, uma vez que Bad e Loss estão fortemente relacionados.
