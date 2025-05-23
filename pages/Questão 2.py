@@ -9,16 +9,7 @@ st.title("Questão 2: Contratos Bons vs Ruins")
 df = load_data()
 df, df_bad, df_good = create_bad_column(df)
 
-col1, col2 = st.columns(2)
-with col1:
-    st.markdown("### Contratos Bons")
-    st.write(df_good.describe().round(2))
-with col2:
-    st.markdown("### Contratos Ruins")
-    st.write(df_bad.describe().round(2))
-
 with st.container():
-    st.markdown("## Questão 2: Contratos Bons vs Ruins")
     df, df_bad, df_good = create_bad_column(df)
     col1, col2 = st.columns(2)
     with col1:
